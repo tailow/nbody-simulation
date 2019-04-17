@@ -131,6 +131,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1503333938}
   - component: {fileID: 1503333937}
+  - component: {fileID: 1503333939}
+  - component: {fileID: 1503333940}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -150,6 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c67ede0603c8e2f4f9c35c0da151782e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nBodyCount: 42271
+  computeShader: {fileID: 7200000, guid: 93a3900fdea5b3e44ba11455c768019e, type: 3}
 --- !u!4 &1503333938
 Transform:
   m_ObjectHideFlags: 0
@@ -164,6 +168,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1503333939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503333936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a17918f872f11bf4ca6b691086152df7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: e9ba04611ee8c5d4aaaea317f29918ee, type: 2}
+--- !u!33 &1503333940
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503333936}
+  m_Mesh: {fileID: 0}
 --- !u!1 &1687258581
 GameObject:
   m_ObjectHideFlags: 0

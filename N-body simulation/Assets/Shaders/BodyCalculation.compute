@@ -1,7 +1,32 @@
 ﻿#pragma kernel CSMain
 
+uint nBodyCount;
+
+RWStructuredBuffer<float3> position : register(u1);
+RWStructuredBuffer<float3> velocity : register(u2);
+
 [numthreads(256,1,1)]
 void CSMain (uint3 id : SV_DispatchThreadID)
 {
-	
+	float3 totalForce = float3(0.0f, 0.0f, 0.0f);
+
+	for (uint i = 0; i < nBodyCount; i++)
+	{
+		float dist = distance(position[i], position[id.x]);
+		float g = 1.0 / dist;
+
+		float3 dir = position[i] - position[id.x];
+
+		dir = dir / (length(dir) + 1e-10);
+
+		float3 force = g * dir;
+
+		if (i != id.x)
+		{
+			totalForce += force;
+		}
+	}
+
+	position[id.x] += velocity[id.x] + totalForce;
+	velocity[id.x] += totalForce;
 }
