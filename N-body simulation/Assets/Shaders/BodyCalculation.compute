@@ -13,13 +13,14 @@ void CSMain (uint3 id : SV_DispatchThreadID)
 	for (uint i = 0; i < nBodyCount; i++)
 	{
 		float dist = distance(position[i], position[id.x]);
-		float g = 1.0 / dist;
+		float g = 1.0 / dist * 0.0001;
 
 		float3 dir = position[i] - position[id.x];
 
 		dir = dir / (length(dir) + 1e-10);
 
-		float3 force = g * dir;
+		float3 force;
+		force = g * dir * 0.001;
 
 		if (i != id.x)
 		{
@@ -27,6 +28,9 @@ void CSMain (uint3 id : SV_DispatchThreadID)
 		}
 	}
 
-	position[id.x] += velocity[id.x] + totalForce;
-	velocity[id.x] += totalForce;
+	float timeStep = 1;
+
+	position[id.x] += velocity[id.x] * timeStep + totalForce / 2.0f;
+
+	velocity[id.x] += totalForce * timeStep;
 }

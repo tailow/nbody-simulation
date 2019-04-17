@@ -55,8 +55,14 @@
 			fixed4 frag(v2f i) : SV_Target
 			{
 				UNITY_SETUP_INSTANCE_ID(i);
+
+				float dist = distance(i.vertex, float4(0.0, 0.0, 0.0, 0.0));
+				float multiplier = 0.1 / pow(dist, 100.0);
  
-				return color;
+				if (multiplier > 1)
+					multiplier = 1;
+ 
+				return color * multiplier;
 			}
 			ENDCG
 		}

@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c67ede0603c8e2f4f9c35c0da151782e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nBodyCount: 42271
+  nBodyCount: 50000
   computeShader: {fileID: 7200000, guid: 93a3900fdea5b3e44ba11455c768019e, type: 3}
 --- !u!4 &1503333938
 Transform:

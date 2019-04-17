@@ -29,8 +29,14 @@ public class GameManagement : MonoBehaviour
 
         for (int i = 0; i < nBodyCount; i++)
         {
-            posData[i] = UnityEngine.Random.onUnitSphere * 2;
-            velData[i] = UnityEngine.Random.insideUnitSphere * 0.001f;
+            float rand_x = (0.5f - (i % 256) / 256.0f) * 16.0f;
+            float rand_y = (0.5f - (i / 256) / 256.0f) * 16.0f;
+
+            posData[i].x = rand_x;
+            posData[i].y = rand_y;
+
+            velData[i].x = rand_y * 0.001f;
+            velData[i].y = -rand_x * 0.001f;
         }
 
         posBuffer.SetData(posData);
