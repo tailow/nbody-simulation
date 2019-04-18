@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nBodyCount: 5000
-  timeStep: 5
+  timeStep: 15
   computeShader: {fileID: 7200000, guid: 93a3900fdea5b3e44ba11455c768019e, type: 3}
 --- !u!4 &1503333938
 Transform:
