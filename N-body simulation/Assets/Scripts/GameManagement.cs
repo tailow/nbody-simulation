@@ -31,9 +31,12 @@ public class GameManagement : MonoBehaviour
 
         for (int i = 0; i < nBodyCount; i++)
         {
-            posData[i] = UnityEngine.Random.insideUnitCircle * 10f;
+            float randX = (0.5f - (i % Mathf.Sqrt(nBodyCount)) / Mathf.Sqrt(nBodyCount)) * 16.0f;
+            float randY = (0.5f - (i / Mathf.Sqrt(nBodyCount)) / Mathf.Sqrt(nBodyCount)) * 16.0f;
 
-            velData[i] = UnityEngine.Random.insideUnitSphere * 0.001f;
+            posData[i] = new Vector3(randX, randY, 0);
+
+            velData[i] = new Vector3(randY, -randX, 0) * 0.001f;
         }
 
         posBuffer.SetData(posData);

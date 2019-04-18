@@ -42,10 +42,10 @@
 				UNITY_SETUP_INSTANCE_ID(v);
 				UNITY_TRANSFER_INSTANCE_ID(v, o);
  
-				o.pos = mul(UNITY_MATRIX_P, mul(UNITY_MATRIX_MV, float4(0.0, 0.0, 0.0, 1.0)) + float4(v.vertex.x, v.vertex.y, 0.0, 0.0));
+				o.pos = mul(UNITY_MATRIX_P, mul(UNITY_MATRIX_MV, float4(position[unity_InstanceID + offset], 1.0)) + float4(v.vertex.x, v.vertex.y, 0.0, 0.0));
 
 				#ifdef UNITY_INSTANCING_ENABLED
-				o.pos += float4(position[unity_InstanceID + offset], 0.0f);
+				o.pos += float4(, 0.0f);
 				#endif
 
 				o.vertex = v.vertex;
@@ -57,6 +57,7 @@
 			{
 				UNITY_SETUP_INSTANCE_ID(i);
 
+				/*
 				float dist = distance(i.vertex, float4(0.0, 0.0, 0.0, 0.0));
 
 				float multiplier = 0.1 / pow(dist, 100.0);
@@ -64,8 +65,9 @@
 				if (multiplier > 1)
 
 					multiplier = 1;
+				*/
 
-				return color * multiplier;
+				return color;
 			}
 			ENDCG
 		}

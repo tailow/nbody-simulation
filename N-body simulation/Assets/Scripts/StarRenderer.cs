@@ -85,9 +85,9 @@ public class StarRenderer : MonoBehaviour
             mpb.SetInt("offset", set * instanceMax);
             
             if (set >= nBodyCount / instanceMax / 2)
-                mpb.SetColor("color", new Color(1, 0, 1, 1));
+                mpb.SetColor("color", new Color(1, 0, 0.5f, 1));
             else
-                mpb.SetColor("color", new Color(0, 1, 1, 1));
+                mpb.SetColor("color", new Color(0, 0.5f, 1, 1));
 
             Graphics.DrawMeshInstanced(mesh, 0, material, transformList[set], instances, mpb);
         }
