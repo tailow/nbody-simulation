@@ -152,8 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c67ede0603c8e2f4f9c35c0da151782e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nBodyCount: 10000
-  timeStep: 5
+  nBodyCount: 5000
+  timeStep: 10
   computeShader: {fileID: 7200000, guid: 93a3900fdea5b3e44ba11455c768019e, type: 3}
 --- !u!4 &1503333938
 Transform:
@@ -182,7 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: e9ba04611ee8c5d4aaaea317f29918ee, type: 2}
-  starSize: 0.02
+  starSize: 0.04
 --- !u!33 &1503333940
 MeshFilter:
   m_ObjectHideFlags: 0
