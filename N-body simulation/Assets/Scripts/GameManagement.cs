@@ -36,7 +36,7 @@ public class GameManagement : MonoBehaviour
 
             posData[i] = new Vector3(randX, randY, 0);
 
-            velData[i] = new Vector3(randY, -randX, 0) * 0.001f;
+            velData[i] = new Vector3(randY, -randX, 0) * 0.003f;
         }
 
         posBuffer.SetData(posData);
