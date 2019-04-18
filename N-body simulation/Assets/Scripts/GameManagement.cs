@@ -6,6 +6,8 @@ public class GameManagement : MonoBehaviour
 {
     public int nBodyCount;
     public float timeStep;
+    public float rotationSpeed;
+    public float gap;
 
     public ComputeShader computeShader;
 
@@ -25,18 +27,19 @@ public class GameManagement : MonoBehaviour
 
         computeShader.SetInt("nBodyCount", nBodyCount);
         computeShader.SetFloat("timeStep", timeStep);
+        computeShader.SetInt("numThreads", (int)Mathf.Sqrt(nBodyCount));
 
         Vector3[] posData = new Vector3[nBodyCount];
         Vector3[] velData = new Vector3[nBodyCount];
 
         for (int i = 0; i < nBodyCount; i++)
         {
-            float randX = (0.5f - (i % Mathf.Sqrt(nBodyCount)) / Mathf.Sqrt(nBodyCount)) * 16.0f;
-            float randY = (0.5f - (i / Mathf.Sqrt(nBodyCount)) / Mathf.Sqrt(nBodyCount)) * 16.0f;
+            float randX = (0.5f - (i % Mathf.Sqrt(nBodyCount)) / Mathf.Sqrt(nBodyCount)) * gap;
+            float randY = (0.5f - (i / Mathf.Sqrt(nBodyCount)) / Mathf.Sqrt(nBodyCount)) * gap;
 
             posData[i] = new Vector3(randX, randY, 0);
 
-            velData[i] = new Vector3(randY, -randX, 0) * 0.003f;
+            velData[i] = new Vector3(randY, -randX, 0) * 0.001f * rotationSpeed;
         }
 
         posBuffer.SetData(posData);
@@ -45,7 +48,7 @@ public class GameManagement : MonoBehaviour
 
     void Update()
     {
-        computeShader.Dispatch(computeShader.FindKernel("CSMain"), 256, 1, 1);
+        computeShader.Dispatch(computeShader.FindKernel("CSMain"), 512, 1, 1);
     }
 
     void OnDestroy()
