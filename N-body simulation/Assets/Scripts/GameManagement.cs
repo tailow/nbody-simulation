@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManagement : MonoBehaviour
 {
     public int nBodyCount;
+    public float timeStep;
 
     public ComputeShader computeShader;
 
@@ -22,21 +23,17 @@ public class GameManagement : MonoBehaviour
         Shader.SetGlobalBuffer(Shader.PropertyToID("position"), posBuffer);
         Shader.SetGlobalBuffer(Shader.PropertyToID("velocity"), velBuffer);
 
-        computeShader.SetInt("bodyCount", nBodyCount);
+        computeShader.SetInt("nBodyCount", nBodyCount);
+        computeShader.SetFloat("timeStep", timeStep);
 
         Vector3[] posData = new Vector3[nBodyCount];
         Vector3[] velData = new Vector3[nBodyCount];
 
         for (int i = 0; i < nBodyCount; i++)
         {
-            float rand_x = (0.5f - (i % 256) / 256.0f) * 16.0f;
-            float rand_y = (0.5f - (i / 256) / 256.0f) * 16.0f;
+            posData[i] = UnityEngine.Random.insideUnitCircle * 10f;
 
-            posData[i].x = rand_x;
-            posData[i].y = rand_y;
-
-            velData[i].x = rand_y * 0.001f;
-            velData[i].y = -rand_x * 0.001f;
+            velData[i] = UnityEngine.Random.insideUnitSphere * 0.001f;
         }
 
         posBuffer.SetData(posData);

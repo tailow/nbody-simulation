@@ -12,15 +12,15 @@ public class StarRenderer : MonoBehaviour
 
     int nBodyCount;
 
-    const int instance_max = 1023;
+    const int instanceMax = 1023;
 
-    const float star_size = 0.01f;
+    public float starSize;
 
     void Start()
     {
         nBodyCount = GetComponent<GameManagement>().nBodyCount;
 
-        transformList = new Matrix4x4[nBodyCount / instance_max][];
+        transformList = new Matrix4x4[nBodyCount / instanceMax][];
 
         MeshFilter meshFilter = GetComponent<MeshFilter>();
 
@@ -29,10 +29,10 @@ public class StarRenderer : MonoBehaviour
 
         Vector3[] vertices = new Vector3[4];
 
-        vertices[0] = new Vector3(-star_size, -star_size, 0);
-        vertices[1] = new Vector3(star_size, -star_size, 0);
-        vertices[2] = new Vector3(-star_size, star_size, 0);
-        vertices[3] = new Vector3(star_size, star_size, 0);
+        vertices[0] = new Vector3(-starSize, -starSize, 0);
+        vertices[1] = new Vector3(starSize, -starSize, 0);
+        vertices[2] = new Vector3(-starSize, starSize, 0);
+        vertices[3] = new Vector3(starSize, starSize, 0);
 
         mesh.vertices = vertices;
 
@@ -48,12 +48,12 @@ public class StarRenderer : MonoBehaviour
 
         mesh.triangles = tri;
 
-        for (int set = 0; set < nBodyCount / instance_max; set++)
+        for (int set = 0; set < nBodyCount / instanceMax; set++)
         {
-            int instances = instance_max;
-            if (set == (nBodyCount / instance_max) - 1)
+            int instances = instanceMax;
+            if (set == (nBodyCount / instanceMax) - 1)
             {
-                instances = nBodyCount % instance_max;
+                instances = nBodyCount % instanceMax;
             }
 
             transformList[set] = new Matrix4x4[instances];
@@ -71,20 +71,23 @@ public class StarRenderer : MonoBehaviour
 
     void Update()
     {
-        for (int set = 0; set < nBodyCount / instance_max; set++)
+        for (int set = 0; set < nBodyCount / instanceMax; set++)
         {
-            int instances = instance_max;
+            int instances = instanceMax;
 
-            if (set == (nBodyCount / instance_max) - 1)
+            if (set == (nBodyCount / instanceMax) - 1)
             {
-                instances = nBodyCount % instance_max;
+                instances = nBodyCount % instanceMax;
             }
 
             MaterialPropertyBlock mpb = new MaterialPropertyBlock();
 
-            mpb.SetInt("offset", set * instance_max);
-
-            mpb.SetColor("color", new Color(1, 1, 1, 1));
+            mpb.SetInt("offset", set * instanceMax);
+            
+            if (set >= nBodyCount / instanceMax / 2)
+                mpb.SetColor("color", new Color(1, 0, 1, 1));
+            else
+                mpb.SetColor("color", new Color(0, 1, 1, 1));
 
             Graphics.DrawMeshInstanced(mesh, 0, material, transformList[set], instances, mpb);
         }
