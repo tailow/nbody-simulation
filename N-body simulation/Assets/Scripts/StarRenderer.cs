@@ -83,8 +83,7 @@ public class StarRenderer : MonoBehaviour
             MaterialPropertyBlock mpb = new MaterialPropertyBlock();
 
             mpb.SetInt("offset", set * instanceMax);
-
-            mpb.SetColor("color", new Color(0, set / Mathf.Sqrt(nBodyCount), 1, 1));
+            mpb.SetColor("color", new Color(1, 1, 1, 1));
 
             Graphics.DrawMeshInstanced(mesh, 0, material, transformList[set], instances, mpb);
         }

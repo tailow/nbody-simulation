@@ -57,17 +57,16 @@
 			{
 				UNITY_SETUP_INSTANCE_ID(i);
 
-				/*
 				float dist = distance(i.vertex, float4(0.0, 0.0, 0.0, 0.0));
 
 				float multiplier = 0.1 / pow(dist, 100.0);
 
 				if (multiplier > 1)
+				{
+					multiplier = 1;				
+				}
 
-					multiplier = 1;
-				*/
-
-				return color;
+				return color * multiplier;
 			}
 			ENDCG
 		}
